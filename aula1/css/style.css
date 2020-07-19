@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    height: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+}
+
+.artigo1{
+    height: 50px;
+    width: 100%;
+    background-color: beige;
+}
+
+.artigo2{
+    height: 50px;
+    width: 100%;
+    background-color: #b2b2b2;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.artigo3{
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    background-color: #dadada;
+    cursor: pointer;
+}
+
+#textA{
+    height: 90px;
+    width: 150px;
+}
+
+select{
+    height: 40px;
+    width: 150px;
+}

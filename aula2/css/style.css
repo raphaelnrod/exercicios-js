@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    height: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.box{
+    height: fit-content;
+    text-align: center;
+    width: 700px;
+    background-color: gainsboro;
+    padding: 30px;
+    margin: 20px;
+}
+
+.box h2{
+    margin: 10px 0;
+}
+
+.box input[type=text]{
+    width: 80%;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.box input[type=button]{
+    width: 20%;
+    height: 30px;
+    margin-top: 10px;
+}

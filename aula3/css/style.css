@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    height: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.box1, .box2, .box3{
+    height: 200px;
+    text-align: center;
+    width: 100%;
+    background-color: gainsboro;
+    padding: 30px 5%;
+    font-size: 11px;
+}
+
+.box2{
+    display: none;
+    background-color: aquamarine;
+}
+
+.box3{
+    display: none;
+    background-color: darkcyan;
+}
