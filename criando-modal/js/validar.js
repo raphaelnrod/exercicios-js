@@ -1,9 +1,9 @@
+//funcao que verifica a incidencia de uma palavra ou trecho de frase, exatamente igual, dentro da frase (case sensitive)
+verifica = (text, word) => text.match(word)
+encontrou = (res) => res ? 'Encontramos' : 'Nao encontramos'
+
 $(function(){
-    var frase = 'frase teste'
-    
-    //funcao que verifica a incidencia de uma palavra ou trecho de frase, exatamente igual, dentro da frase (case sensitive)
-    verifica = (text, word) => text.match(word)
-    encontrou = (res) => res ? 'Encontramos' : 'Nao encontramos'
+    var frase = 'frase teste'   
 
     //deve-se colocar o trecho a ser pesquisado dentro de uma expressao regular, entre duas barras /conteudo/
     var res = verifica(frase, /asdf/) //retorno false
