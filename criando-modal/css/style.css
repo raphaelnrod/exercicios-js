@@ -76,6 +76,7 @@ form.cadastro input[type=text]{
     line-height: 48px;
     padding-left: 8px;
     border: 1px solid #ccc;
+    color: black;
 }
 
 form.cadastro input[type=submit]{

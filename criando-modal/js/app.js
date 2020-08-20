@@ -1,66 +1,98 @@
 //funcao que verifica a incidencia de uma palavra ou trecho de frase, exatamente igual, dentro da frase (case sensitive)
-verifica = (text, word) => text.match(word)
-encontrou = (res) => res ? 'Encontramos' : 'Nao encontramos'
+verifica = (text, word) => text.match(word);
+encontrou = (res) => (res ? "Encontramos" : "Nao encontramos");
 
-$(function(){
+$(function () {
+  openForm();
+  dismissClick();
 
-    openForm()
-    dismissClick()
-    
-    //abre o modal ao clicar no btn
-    function openForm(){
-        $('.btn').click((e) => {
-            $('.bg').fadeIn()
-            e.stopPropagation()
-            $('form.cadastro').appendTo('.posicao')
-        })
+  $("form.cadastro").submit(function (e) {
+    e.preventDefault();
+    let validate = 0;
+    var nome = $("input[name=nome]").val();
+    var tel = $("input[name=telefone]").val();
+    var email = $("input[name=email]").val();
+
+    !verifyName(nome) ? warningInputError($("input[name=nome]")) : validate++;
+
+    !verifyPhone(tel.toString())
+      ? warningInputError($("input[name=telefone]"))
+      : validate++;
+
+    !verifyEmail(email)
+      ? warningInputError($("input[name=email]"))
+      : validate++;
+
+    if (validate === 3){
+      $(".bg").fadeOut();
+      setTimeout(() => {
+        alert('Validado com sucesso!');
+        resetInput($('input[name=nome]'));
+        resetInput($('input[name=telefone]'));
+        resetInput($('input[name=email]'));        
+      }, 420);
     }
+  });
 
-    //fecha o modal ao clicar fora do objeto
-    function dismissClick(){
-        $('body').click(() => $('.bg').fadeOut())
-        $('form.cadastro').click((e) => e.stopPropagation())
-    }
+  $("input[type=text]").focus(function (e) {
+    $(this).val() === "Campo inválido!" && resetInput($(this));
+  });
 
-    $('form.cadastro').submit(function (e){
-        e.preventDefault()
-        var nome = $('input[name=nome]').val();
-        var tel = $('input[name=telefone]').val();
-        var email = $('input[name=email]').val();
+  //abre o modal ao clicar no btn
+  function openForm() {
+    $(".btn").click((e) => {
+      $(".bg").fadeIn();
+      e.stopPropagation();
+      $("form.cadastro").appendTo(".posicao");
+    });
+  }
 
-        var amount = nome.split(' ').length;
-        var splitName = nome.split(' ');
-        amount >= 2 ? verifyName(amount, splitName) : warningInputError($('input[name=nome]'))
+  //fecha o modal ao clicar fora do objeto
+  function dismissClick() {
+    $("body").mousedown((e) => {
+      let target = $(e.target);
+      !target.is("DIV") ? e.stopPropagation() : $(".bg").fadeOut();
+    });
+  }
 
-        return false;
-    })
-
-    function verifyName(amt, splitStr){
-        for (var i = 0; i < amt; i++){
-            if(splitStr[i].match(/^[A-Z]{1}[a-z]{1,}$/)){
-                imprimeConsole("Bateu")
-                $('input[name=nome]').css('border', '1px solid #ccc')
-            }else{
-                warningInputError($('input[name=nome]'))
-                return false
-            }
+  function verifyName(nome) {
+    let amt = nome.split(" ").length;
+    let splitStr = nome.split(" ");
+    if (amt >= 2) {
+      for (var i = 0; i < amt; i++) {
+        if (splitStr[i].match(/^[A-Z]{1}[a-z]{1,}$/)) {
+          return true;
+        } else {
+          return false;
         }
+      }
+    } else {
+      return false;
     }
+  }
 
-    function imprimeConsole(str){
-        console.log(str);
+  function verifyPhone(phone) {
+    let numbers = phone.replace(/[^\d]+/g, "");
+    if (numbers.length === 11) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    function warningInputError(element){
-        element.css('border', '2px solid red')
-        element.data('invalido', 'true')
-        el.val('Campo inválido!')
-    }
+  function verifyEmail(email) {
+    return verifica(email, /^(.*?)@(.*?).com(.*?)$/);
+  }
 
-    var teste = 'raphael augusto';
-    var res3 = verifica(teste, /raphael/);
-    console.log(encontrou(res3));
-})
+  function warningInputError(element) {
+    element.css("color", "red");
+    element.css("border", "2px solid red");
+    element.val("Campo inválido!");
+  }
 
-
-
+  function resetInput(element) {
+    element.css("color", "black");
+    element.css("border", "1px solid #ccc");
+    element.val("");
+  }
+});
